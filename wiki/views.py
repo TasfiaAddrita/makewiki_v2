@@ -27,14 +27,17 @@ class PageDetailView(DetailView):
         page = self.get_queryset().get(slug__iexact=slug)
         return render(request, 'page.html', {
           'page': page
-        })
+    })
 
 class PageCreateView(CreateView):
     template_name = 'new_page.html'
     form_class = PageForm
     success_url = '/'
-    queryset = Page.objects.all()
+    # queryset = Page.objects.all()
 
     def form_valid(self, form):
         print(form.cleaned_data)
         return super().form_valid(form)
+
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
